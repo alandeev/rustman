@@ -8,10 +8,12 @@
 	import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 	import scssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
 	import { emmetHTML, emmetCSS, type Dispose } from 'emmet-monaco-es';
+	import { cn } from '~/lib/utils';
 
 	let disposeEmmetHTML: Dispose;
 	let disposeEmmetCSS: Dispose;
 
+	let editorWrapper: HTMLDivElement;
 	let editorContainer: HTMLDivElement;
 	let editor: monaco.editor.IStandaloneCodeEditor;
 
@@ -28,8 +30,7 @@
 
 	const resizeObserver = new ResizeObserver(() => {
 		if (editor) {
-			editor.layout({ width: 0, height: 0 });
-			editor.layout();
+			editor.layout({ width: editorWrapper.clientWidth, height: editorWrapper.clientHeight });
 		}
 	});
 
@@ -67,20 +68,20 @@
 		editor = monaco.editor.create(editorContainer, {
 			value: editorValue,
 			language,
-			automaticLayout: true,
+			// automaticLayout: true,
 			theme: 'vs-dark',
 			minimap: {
-				enabled: false
-			},
+				enabled: true
+			}
 		});
 
-		resizeObserver.observe(editorContainer);
+		resizeObserver.observe(editorWrapper);
 
 		editor.onDidChangeModelContent(handleEditorValueChange);
 	});
 
 	onDestroy(() => {
-		resizeObserver.unobserve(editorContainer);
+		resizeObserver.disconnect();
 		disposeEmmetHTML();
 		disposeEmmetCSS();
 		editor.dispose();
@@ -91,4 +92,6 @@
 	}
 </script>
 
-<div bind:this={editorContainer} {style} class={"resize-x overflow-x-auto w-full"} />
+<div bind:this={editorWrapper} class={cn(className,"relative")}>
+	<div bind:this={editorContainer} {style} class={'absolute'} />
+</div>

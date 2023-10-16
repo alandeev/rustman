@@ -5,7 +5,6 @@
 	import * as Select from '$lib/components/ui/select';
 	import { request } from '~/lib/request';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import * as Card from '$lib/components/ui/card';
 	import CodeEditor from '~/lib/components/code/CodeEditor.svelte';
 
 	const methods = [
@@ -51,7 +50,7 @@
 	</div>
 
 	<div class="flex flex-1 gap-3 flex-col md:flex-row">
-		<Tabs.Root value="body" class="flex-1">
+		<Tabs.Root value="body" class="flex flex-col flex-auto">
 			<Tabs.List>
 				<Tabs.Trigger value="body">Body</Tabs.Trigger>
 				<Tabs.Trigger value="authentication">Authentication</Tabs.Trigger>
@@ -59,47 +58,27 @@
 				<Tabs.Trigger value="headers">Headers</Tabs.Trigger>
 				<Tabs.Trigger value="docs">Docs</Tabs.Trigger>
 			</Tabs.List>
-			<Tabs.Content value="body" class="flex h-5/6 m-0 p-0">
-				<Card.Content class="flex flex-1  m-0 p-0">
-					<CodeEditor bind:editorValue={requestBody} language="json" class="h-full flex-1" />
-				</Card.Content>
+			<Tabs.Content value="body" class="flex m-0 p-0 flex-1">
+				<CodeEditor bind:editorValue={requestBody} language="json" class="flex-auto" />
 			</Tabs.Content>
-			<Tabs.Content value="headers">
-				<Card.Content />
-			</Tabs.Content>
-			<Tabs.Content value="cookies">
-				<Card.Content />
-			</Tabs.Content>
-			<Tabs.Content value="timeline">
-				<Card.Content />
-			</Tabs.Content>
+			<Tabs.Content value="headers" />
+			<Tabs.Content value="cookies" />
+			<Tabs.Content value="timeline" />
 		</Tabs.Root>
 
-		<Tabs.Root value="preview" class="flex-1">
+		<Tabs.Root value="preview" class="flex flex-col flex-auto">
 			<Tabs.List>
 				<Tabs.Trigger value="preview">Preview</Tabs.Trigger>
 				<Tabs.Trigger value="headers">Headers</Tabs.Trigger>
 				<Tabs.Trigger value="cookies">Cookies</Tabs.Trigger>
 				<Tabs.Trigger value="timeline">Timeline</Tabs.Trigger>
 			</Tabs.List>
-			<Tabs.Content value="preview" class="flex h-5/6 m-0 p-0">
-				<Card.Content class="flex m-0 p-0 overflow-hidden flex-1">
-					<CodeEditor
-						bind:editorValue={responsePreview}
-						language="json"
-						class="h-full w-full overflow-hidden"
-					/>
-				</Card.Content>
+			<Tabs.Content value="preview" class="flex m-0 p-0 flex-auto">
+				<CodeEditor bind:editorValue={responsePreview} language="json" class="flex-auto" />
 			</Tabs.Content>
-			<Tabs.Content value="headers">
-				<Card.Content />
-			</Tabs.Content>
-			<Tabs.Content value="cookies">
-				<Card.Content />
-			</Tabs.Content>
-			<Tabs.Content value="timeline">
-				<Card.Content />
-			</Tabs.Content>
+			<Tabs.Content value="headers" />
+			<Tabs.Content value="cookies" />
+			<Tabs.Content value="timeline" />
 		</Tabs.Root>
 	</div>
 </div>
