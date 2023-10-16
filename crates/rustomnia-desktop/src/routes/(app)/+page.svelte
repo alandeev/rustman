@@ -27,24 +27,23 @@
 	}
 </script>
 
-<div class="flex flex-col space-y-5 h-full">
-	<Select.Root>
-		<Select.Trigger class="w-[180px]">
-			<Select.Value placeholder="Select a method" />
-		</Select.Trigger>
-		<Select.Content>
-			<Select.Group>
-				<Select.Label>Request Method</Select.Label>
-				{#each methods as method}
-					<Select.Item value={method.value} label={method.label}>{method.label}</Select.Item>
-				{/each}
-			</Select.Group>
-		</Select.Content>
-		<Select.Input name="method" bind:value={requestMethod} />
-	</Select.Root>
-
+<div class="flex flex-col flex-auto gap-2 m-2">
 	<div class="flex items-center space-x-2">
 		<Label for="url" class="mr-2">URL:</Label>
+		<Select.Root>
+			<Select.Trigger class="w-[180px]">
+				<Select.Value placeholder="Select a method" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Group>
+					<Select.Label>Request Method</Select.Label>
+					{#each methods as method}
+						<Select.Item value={method.value} label={method.label}>{method.label}</Select.Item>
+					{/each}
+				</Select.Group>
+			</Select.Content>
+			<Select.Input name="method" bind:value={requestMethod} />
+		</Select.Root>
 		<Input type="url" placeholder="Enter URL..." class="max-w-xs" bind:value={requestUrl} />
 		<Button on:click={() => sendRequest()}>Send</Button>
 	</div>

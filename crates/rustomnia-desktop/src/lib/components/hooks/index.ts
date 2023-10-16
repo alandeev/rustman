@@ -1,0 +1,1 @@
+export { default as ExpandHook, expandHook } from './ExpandHook.svelte';
