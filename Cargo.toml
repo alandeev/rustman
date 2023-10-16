@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+
+members = [
+  "crates/axios",
+  "crates/rustomnia-desktop/src-tauri",
+]

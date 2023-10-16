@@ -1,0 +1,19 @@
+{
+  "name": "rustomnia",
+  "version": "0.1.0",
+  "description": "rustomnia app",
+  "keywords": ["rustomnia"],
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "crates/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "packageManager": "pnpm@8.9.0"
+}
